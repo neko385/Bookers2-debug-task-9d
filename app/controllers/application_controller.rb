@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!, except:[:top, :about]
-  # 「except」➡︎〜を除外す。ログインしていない時はtop,about以外にはアクセスできない。
+  # 「except」➡︎〜を除外する。ログインしていない時はtop,about以外にはアクセスできない。
   #　アクセスしてもトップに戻る
   before_action :configure_permitted_parameters, if: :devise_controller?
 
