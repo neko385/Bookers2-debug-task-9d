@@ -4,7 +4,12 @@ Rails.application.routes.draw do
   root :to =>"homes#top"
   get "home/about"=>"homes#about"
   devise_for :users
-  resources :books, only: [:index,:show,:edit,:create,:destroy,:update]
+  resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
+    #単数形にすると、/:idがURLに含まれなくなる
+    #resourceは「それ自身のidがわからなくても、関連する他のモデルのidから特定できる」場合に用いることが多い
+    resource :favorites, only: [:create, :destroy]
+  end
+
   resources :users, only: [:index,:show,:edit,:update]
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
