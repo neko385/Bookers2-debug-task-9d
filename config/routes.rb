@@ -5,9 +5,11 @@ Rails.application.routes.draw do
   get "home/about"=>"homes#about"
   devise_for :users
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
+    resources :book_comments, only:[:create]
     #単数形にすると、/:idがURLに含まれなくなる
     #resourceは「それ自身のidがわからなくても、関連する他のモデルのidから特定できる」場合に用いることが多い
     resource :favorites, only: [:create, :destroy]
+
   end
 
   resources :users, only: [:index,:show,:edit,:update]
